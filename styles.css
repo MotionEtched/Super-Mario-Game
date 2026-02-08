@@ -1,0 +1,172 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to bottom, #5c94fc, #87ceeb);
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-container{
+    background: #fff;
+    border: 3px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px #000;
+}
+
+.ui{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 800px;
+}
+
+#game-area{
+    width: 800px;
+    height: 400px;
+    background: linear-gradient(to bottom, #5c94fc 80%, #228b22 80%, #228b22 100%);
+    border: 2px solid #333;
+    overflow: hidden;
+}
+
+#mario{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image:
+    z-index: 100;
+}
+
+#mario-big{
+    width: 40px;
+    height: 40px;
+    background-image: 
+}
+
+.platform{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.platform.ground{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.platform.blue{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.enemy{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.enemy.purple{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.coin{
+    width: 20px;
+    height: 20px;
+    background-image:
+    animation: coinSpin 1s linear infinite;
+}
+
+@keyframes coinSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.surprise-block{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.surprise-block.hit{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.pipe{
+    width: 20px;
+    height: 20px;
+}
+
+.pipe-top{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.pipe-top-right{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.pipe-bottom{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.pipe-bottom-right{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
+.controls{
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#game-over{
+    position: absolute;
+    top: 50%;
+    border: 3px solid #fff;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#restart-button{
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px 20px;
+}
+
+#restart-button:hover{
+    background-color: #ff5252;
+}
