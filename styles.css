@@ -31,6 +31,7 @@ body{
 }
 
 #game-area{
+    position: relative;
     width: 800px;
     height: 400px;
     background: linear-gradient(to bottom, #5c94fc 80%, #228b22 80%, #228b22 100%);
@@ -64,13 +65,19 @@ body{
     background-image:
 }
 
+.platform.floating{
+    width: 20px;
+    height: 20px;
+    background-image:
+}
+
 .platform.blue{
     width: 20px;
     height: 20px;
     background-image:
 }
 
-.enemy{
+.enemy.brown{
     width: 20px;
     height: 20px;
     background-image:
