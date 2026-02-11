@@ -132,11 +132,34 @@ function loadLevel(levelIndex) {
     player.bigTimer = 0;
     player.element.className = ''
     updateElementPosition(player.element, player.x, player.y);
+
+    //Create Platforms
+    level.platforms.forEach((platformData, index) => {
+        const platform = createElement('div', 'platform ${platformData.type}', {
+            left: platformData.x +'px',
+            top: platformData.y +'px',
+            width: platformData.width + 'px',
+            height: platformData.height + 'px',
+        })
+        gameArea.appendChild(platform);
+        gameObjects.platforms.push({
+            element: platform,
+            ...platformData,
+            id: 'platform-' + index
+        });
+    })
 }
 
 function updateElementPosition(element, x, y) {
     element.style.left = x + 'px';
     element.style.top = y + 'px';
+}
+
+function createElement(type, className, styles = {}) {
+    const element = document.createElement('div');
+    element.className = className;
+    Object.assign(element.style, styles);
+    return element;
 }
 
 //Start game
