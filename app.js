@@ -168,6 +168,24 @@ function loadLevel(levelIndex) {
             alive: true
         });
     })
+
+    //Create Coins
+    level.coins.forEach((coinData, index) => {
+        const coin = createElement('div', 'coin',{
+            left: coinData.x +'px',
+            top: coinData.y +'px',
+        })
+        gameArea.appendChild(coin);
+        gameObjects.coins.push({
+            element: coin,
+            x: coinData.x,
+            y: coinData.y,
+            width: 20,
+            height: 20,
+            collected: false,
+            id: 'coin-' + index
+        });
+    })
 }
 
 function updateElementPosition(element, x, y) {
