@@ -205,6 +205,29 @@ function loadLevel(levelIndex) {
             id: 'block-' + index
         });
     })
+
+    //Create Pipes
+    level.pipes.forEach((pipeData, index) => {
+        const pipe = createElement('div', 'pipe', {
+            left: pipeData.x +'px',
+            top: pipeData.y +'px',
+        })
+        const pipeTopLeft = createElement('div', 'pipe-top');
+        const pipeTopRight = createElement('div', 'pipe-top-right');
+        const pipeBottomLeft = createElement('div', 'pipe-bottom');
+        const pipeBottomRight = createElement('div', 'pipe-bottom-right');
+
+        pipe.appendChild(pipeTopLeft, pipeTopRight, pipeBottomLeft, pipeBottomRight);
+        gameArea.appendChild(pipe);
+        gameObjects.pipes.push({
+            element: pipe,
+            x: pipeData.x,
+            y: pipeData.y,
+            width: 40,
+            height: 40,
+            id: 'pipe-' + index
+        });
+    })
 }
 
 function updateElementPosition(element, x, y) {
