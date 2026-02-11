@@ -186,6 +186,25 @@ function loadLevel(levelIndex) {
             id: 'coin-' + index
         });
     })
+
+    //Create Surprise Blocks
+    level.surpriseBlocks.forEach((blockData, index) => {
+        const block = createElement('div', 'surprise-block', {
+            left: blockData.x +'px',
+            top: blockData.y +'px',
+        })
+        gameArea.appendChild(block);
+        gameObjects.surpriseBlocks.push({
+            element: block,
+            x: blockData.x,
+            y: blockData.y,
+            width: 20,
+            height: 20,
+            type: blockData.type,
+            hit: false,
+            id: 'block-' + index
+        });
+    })
 }
 
 function updateElementPosition(element, x, y) {

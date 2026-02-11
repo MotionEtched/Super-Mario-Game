@@ -82,18 +82,21 @@ body{
 }
 
 .enemy.brown{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .enemy.purple{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .coin{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
@@ -110,41 +113,48 @@ body{
 }
 
 .surprise-block{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .surprise-block.hit{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .pipe{
+    position: absolute;
     width: 20px;
     height: 20px;
 }
 
 .pipe-top{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .pipe-top-right{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .pipe-bottom{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .pipe-bottom-right{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
