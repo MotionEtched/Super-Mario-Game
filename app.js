@@ -169,5 +169,51 @@ function showGameOver(won) {
     document.getElementById('game-over').style.display = 'block';
 }
 
+function clearLevel() {
+    //const gameArea = document.getElementById('game-area');
+    Object.values(gameObjects).flat().forEach(obj => {
+        if (obj.element && obj.element.parentNode) {
+            obj.element.remove();
+        }
+    })
+
+    gameObjects = {
+        platforms: [],
+        enemies: [],
+        coins: [],
+        surpriseBlocks: [],
+        pipes: [],
+    }
+}
+
+//Input Handling
+
+document.addEventListener('keydown', (e) => {
+    gameState.keys[e.code] = true;
+
+    if (e.code === "Space") {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('keyup', (e) => {
+    gameState.keys[e.code] = false;
+});
+
+//Game Loop
+
+function gameLoop() {
+    if (!gameState.gameRunning) return;
+    update();
+    requestAnimationFrame(gameLoop);
+}
+
+//Update Game Logic
+
+function update() {
+    
+}
+
+
 //Start game
 initGame();
