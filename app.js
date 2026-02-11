@@ -8,10 +8,10 @@ const ENEMY_SPEED = 1;
 //Game State
 
 let gameState = {
-    score = 0;
-    level = 1;
-    lives: 3;
-    gameRunning: true;
+    score: 0,
+    level: 1,
+    lives: 3,
+    gameRunning: true,
     keys: {}
 }
 
@@ -135,7 +135,7 @@ function loadLevel(levelIndex) {
 
     //Create Platforms
     level.platforms.forEach((platformData, index) => {
-        const platform = createElement('div', 'platform ${platformData.type}', {
+        const platform = createElement('div', `platform ${platformData.type}`, {
             left: platformData.x +'px',
             top: platformData.y +'px',
             width: platformData.width + 'px',
@@ -146,6 +146,26 @@ function loadLevel(levelIndex) {
             element: platform,
             ...platformData,
             id: 'platform-' + index
+        });
+    })
+
+    //Create Enemies
+    level.enemies.forEach((enemyData, index) => {
+        const enemy = createElement('div', `enemy ${enemyData.type}`, {
+            left: enemyData.x +'px',
+            top: enemyData.y +'px',
+        })
+        gameArea.appendChild(enemy);
+        gameObjects.enemies.push({
+            element: enemy,
+            x: enemyData.x,
+            y: enemyData.y,
+            width: 20,
+            height: 20,
+            direction: -1,
+            speed: ENEMY_SPEED,
+            id: 'enemy-' + index,
+            alive: true
         });
     })
 }
@@ -211,8 +231,9 @@ function gameLoop() {
 //Update Game Logic
 
 function update() {
-    
+
 }
+
 
 
 //Start game
