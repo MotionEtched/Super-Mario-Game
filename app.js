@@ -20,7 +20,7 @@ let gameState = {
 let player = {
     element: document.getElementById('mario'),
     x: 50,
-    y: 0,
+    y: 340,
     width: 20,
     height: 20,
     velocityX: 0,
@@ -67,7 +67,7 @@ const levels = [
             {x: 250, y: 220, type: 'mushroom'}
         ],
         pipes: [
-            {x: 750, y: 300}
+            {x: 750, y: 320}
         ]
     },
     //level 2
@@ -99,7 +99,7 @@ const levels = [
             {x: 400, y: 220, type: 'mushroom'}
         ],
         pipes: [
-            {x: 750, y: 300}
+            {x: 750, y: 320}
         ]
     }
 ]
@@ -125,7 +125,7 @@ function loadLevel(levelIndex) {
 
     //Reset player position
     player.x = 50;
-    player.y = 300;
+    player.y = 340;
     player.velocityX = 0;
     player.velocityY = 0;
     player.big = false;
