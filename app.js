@@ -113,12 +113,12 @@ function initGame() {
 
 function loadLevel(levelIndex) {
     if (levelIndex >= levels.length) {
-        //showGameOver(true)
+        showGameOver(true)
         return;
     }
 
     //Clearing existing objects
-    //clear lever()
+    clearLevel();
 
     const level = level[levelIndex];
     const gameArea = document.getElementById('game-area');
@@ -160,6 +160,13 @@ function createElement(type, className, styles = {}) {
     element.className = className;
     Object.assign(element.style, styles);
     return element;
+}
+
+function showGameOver(won) {
+    gameState.gameRunning = false;
+    document.getElementById('game-over').textContent = won? 'Congratulations! You won!' : 'Game Over!';
+    document.getElementById('final-score').textContent = gameState.score;
+    document.getElementById('game-over').style.display = 'block';
 }
 
 //Start game

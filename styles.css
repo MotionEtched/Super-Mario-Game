@@ -54,24 +54,28 @@ body{
 }
 
 .platform{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .platform.ground{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .platform.floating{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
 }
 
 .platform.blue{
+    position: absolute;
     width: 20px;
     height: 20px;
     background-image:
@@ -162,6 +166,7 @@ body{
     border-radius: 10px;
     text-align: center;
     z-index: 1000;
+    display: none;
 }
 
 #restart-button{
