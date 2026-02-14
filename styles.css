@@ -43,9 +43,9 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
-    z-index: 100;
+    z-index: 1000;
 }
+
 
 #mario-big{
     width: 40px;

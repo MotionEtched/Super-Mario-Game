@@ -328,6 +328,43 @@ function update() {
         }
     }
 
+    //Pipe Collision
+    for (let pipe of gameObjects.pipes) {
+        if (checkCollision(player, pipe)) {
+            if (player.velocityY > 0) {           // Falling down onto pipe
+                player.y = pipe.y - player.height;
+                player.velocityY = 0;
+                player.grounded = true;
+            }
+        }
+    }
+
+    //enemy movement collision
+    for (let enemy of gameObjects.enemies) {
+        if (!enemy.alive) continue;
+        enemy.x += enemy.direction * enemy.speed;
+
+        let onPlatform = false;
+        //Reverse direction on platform edges
+        for (let platform of gameObjects.platforms) {
+            if(enemy.x + enemy.width > platform.x &&
+                enemy.x < platform.x + platform.width &&
+                enemy.y + enemy.height >= platform.y -5 &&
+                enemy.y + enemy.height <= platform.y +5
+            ) {
+                onPlatform = true;
+                break;
+            }
+        }
+
+        if (!onPlatform || enemy.x <=0 || enemy.x >= 800) {
+            enemy.direction *= -1;
+        }
+
+        updateElementPosition(enemy.element, enemy.x, enemy.y);
+    }
+
+
     updateElementPosition(player.element, player.x, player.y);
 
 }
