@@ -317,6 +317,7 @@ function update() {
     player.y += player.velocityY;
 
     //Platform Collision
+    player.grounded = false;
     for (let platform of gameObjects.platforms) {
         if (checkCollision(player, platform)) {
             if (player.velocityY > 0) {             // Falling down
