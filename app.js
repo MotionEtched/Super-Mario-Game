@@ -312,6 +312,30 @@ function update() {
         player.velocityY += GRAVITY;
     }
 
+    //Update player position
+    player.x += player.velocityX;
+    player.y += player.velocityY;
+
+    //Platform Collision
+    for (let platform of gameObjects.platforms) {
+        if (checkCollision(player, platform)) {
+            if (player.velocityY > 0) {             // Falling down
+                player.y = platform.y - player.height;
+                player.velocityY = 0;
+                player.grounded = true;
+            }
+        }
+    }
+
+    updateElementPosition(player.element, player.x, player.y);
+
+}
+
+function checkCollision(rect1, rect2) {
+    return element1.x < element2.x + element2.width &&
+    element1.x + element1.width > element2.x &&
+    element1.y < element2.y + element2.height &&
+    element1.y + element1.height > element2.y;
 }
 
 
