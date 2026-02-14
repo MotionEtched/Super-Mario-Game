@@ -107,6 +107,12 @@ const levels = [
 //Initialize Game
 
 function initGame() {
+    player.element = document.getElementById('mario');
+    if (!player.element) {
+        console.error('Mario element not found');
+        return;
+    }
+
     loadLevel(gameState.level -1);
     gameLoop();
 }
@@ -120,7 +126,7 @@ function loadLevel(levelIndex) {
     //Clearing existing objects
     clearLevel();
 
-    const level = level[levelIndex];
+    const level = levels[levelIndex];
     const gameArea = document.getElementById('game-area');
 
     //Reset player position
@@ -217,7 +223,7 @@ function loadLevel(levelIndex) {
         const pipeBottomLeft = createElement('div', 'pipe-bottom');
         const pipeBottomRight = createElement('div', 'pipe-bottom-right');
 
-        pipe.appendChild(pipeTopLeft, pipeTopRight, pipeBottomLeft, pipeBottomRight);
+        pipe.append(pipeTopLeft, pipeTopRight, pipeBottomLeft, pipeBottomRight);
         gameArea.appendChild(pipe);
         gameObjects.pipes.push({
             element: pipe,
@@ -244,7 +250,7 @@ function createElement(type, className, styles = {}) {
 
 function showGameOver(won) {
     gameState.gameRunning = false;
-    document.getElementById('game-over').textContent = won? 'Congratulations! You won!' : 'Game Over!';
+    document.getElementById('game-over-title').textContent = won ? 'Congratulations! You won!' : 'Game Over!';
     document.getElementById('final-score').textContent = gameState.score;
     document.getElementById('game-over').style.display = 'block';
 }
@@ -268,16 +274,22 @@ function clearLevel() {
 
 //Input Handling
 
-document.addEventListener('keydown', (e) => {
+window.addEventListener('keydown', (e) => {
     gameState.keys[e.code] = true;
+    gameState.keys[e.key] = true;
 
-    if (e.code === "Space") {
+    if (['Space', 'ArrowUp', 'KeyW', 'ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'].includes(e.code)) {
         e.preventDefault();
     }
 });
 
-document.addEventListener('keyup', (e) => {
+window.addEventListener('keyup', (e) => {
     gameState.keys[e.code] = false;
+    gameState.keys[e.key] = false;
+
+    if (['Space', 'ArrowUp', 'KeyW', 'ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'].includes(e.code)) {
+        e.preventDefault();
+    }
 });
 
 //Game Loop
@@ -293,16 +305,16 @@ function gameLoop() {
 function update() {
     console.log(gameState.keys);
     // Handles left and right movement
-    if (gameState.keys['ArrowLeft'] || gameState.keys['KeyA']) {
+    if (gameState.keys['ArrowLeft'] || gameState.keys['KeyA'] || gameState.keys['a'] || gameState.keys['A']) {
         player.velocityX = -MOVE_SPEED;
-    } else if (gameState.keys['ArrowRight'] || gameState.keys['KeyD']) {
+    } else if (gameState.keys['ArrowRight'] || gameState.keys['KeyD'] || gameState.keys['d'] || gameState.keys['D']) {
         player.velocityX = MOVE_SPEED;
     } else {
         player.velocityX *= 0.8;
     }
 
     //Handle jumping
-    if (gameState.keys['Space'] && player.grounded) {
+    if ((gameState.keys['Space'] || gameState.keys[' '] || gameState.keys['ArrowUp'] || gameState.keys['KeyW'] || gameState.keys['w'] || gameState.keys['W']) && player.grounded) {
         player.velocityY = JUMP_FORCE;
         player.grounded = false;
     }
@@ -362,20 +374,139 @@ function update() {
         }
 
         updateElementPosition(enemy.element, enemy.x, enemy.y);
+
+        //Check collision with player-enemy
+        if (checkCollision(player, enemy)) {
+            if (player.velocityY > 0 && player.y < enemy.y) { // Player is falling onto enemy
+                //Jump on enemy
+                enemy.alive = false;
+                enemy.element.remove();
+                player.velocityY = JUMP_FORCE * 0.7;
+                gameState.score += 100;
+            } else{
+                //hit by enemy
+                if (player.big) {
+                    player.big = false;
+                    player.bigTimer = 0;
+                    player.element.classList.remove('big');
+                    player.width = 20;
+                    player.height = 20;
+                } else{
+                    loselife();
+                }
+            }
+        }
+    }
+
+     //coin collection
+    for (let coin of gameObjects.coins) {
+        if (!coin.collected && checkCollision(player, coin)) {
+            coin.collected = true;
+            coin.element.remove();
+            gameState.score += 50;
+        }
+    }
+
+    //Surprise blocks interaction
+    for (let block of gameObjects.surpriseBlocks) {
+        if (!block.hit && checkCollision(player, block) && player.velocityY < 0) {
+            block.hit = true;
+            block.element.classList.add('hit');
+
+            if (block.type === 'mushroom') {
+                player.big = true;
+                player.bigTimer = 600; // Big state lasts for 10 seconds at 60fps
+                player.element.classList.add('big');
+                player.width = 30;
+                player.height = 30;
+                gameState.score += 100;
+            } else if (block.type === 'coin') {
+                gameState.score += 50;
+            }
+        }
+    }
+
+    //Pipe interaction(level completion)
+    for (let pipe of gameObjects.pipes) {
+        if (player.grounded &&
+            player.x + player.width > pipe.x &&
+            player.x < pipe.x + pipe.width &&
+            Math.abs(player.y + player.height - pipe.y) < 5 &&
+            gameState.keys['ArrowDown']) {
+                nextLevel();
+
+        }
+    }
+
+    //Fall death
+    if (player.y > 400) {
+        loselife();
     }
 
 
     updateElementPosition(player.element, player.x, player.y);
 
+    document.getElementById('score').textContent = gameState.score;
+     document.getElementById('lives').textContent = gameState.lives;
+        document.getElementById('levels').textContent = gameState.level;
+
 }
 
 function checkCollision(rect1, rect2) {
-    return element1.x < element2.x + element2.width &&
-    element1.x + element1.width > element2.x &&
-    element1.y < element2.y + element2.height &&
-    element1.y + element1.height > element2.y;
+    return rect1.x < rect2.x + rect2.width &&
+    rect1.x + rect1.width > rect2.x &&
+    rect1.y < rect2.y + rect2.height &&
+    rect1.y + rect1.height > rect2.y;
 }
 
+function loselife() {
+    gameState.lives--;
+    if (gameState.lives <= 0) {
+        showGameOver(false);
+    } else {
+        //Reset player position
+        player.x = 50;
+        player.y = 340;
+        player.velocityX = 0;
+        player.velocityY = 0;
+        player.big = false;
+        player.bigTimer = 0;
+        player.element.classList.remove('big');
+        player.width = 20;
+        player.height = 20;
+    }
+}
+
+
+function nextLevel() {
+    gameState.level++;
+    if (gameState.level > levels.length) {
+        showGameOver(true);
+    } else {
+        loadLevel(gameState.level -1);
+    }
+}
+
+
+function restartGame() {
+    gameState = {
+    score: 0,
+    level: 1,
+    lives: 3,
+    gameRunning: true,
+    keys: {}
+}
+    player.big = false;
+    player.bigTimer = 0;
+    player.element.classList.remove('big');
+    player.width = 20;
+    player.height = 20;
+
+    document.getElementById('game-over').style.display = 'none';
+    initGame();
+}
+
+document.getElementById('restart-button').addEventListener('click', restartGame);
 
 
 //Start game

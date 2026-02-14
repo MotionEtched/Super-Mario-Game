@@ -39,67 +39,92 @@ body{
     overflow: hidden;
 }
 
-#mario{
+#mario {
     position: absolute;
+    left: 50px;
+    top: 340px;
     width: 20px;
     height: 20px;
+    background-image: url('assets/mario.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     z-index: 1000;
+}
+
+#mario img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 
 #mario-big{
-    width: 40px;
-    height: 40px;
-    background-image: 
+    width: 30px;
+    height: 30px;
+    background-image: url('assets/mario.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .platform{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
+    background-image: url('assets/platform.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .platform.ground{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
 }
 
 .platform.floating{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
 }
 
 .platform.blue{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
 }
 
 .enemy.brown{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
+    background-image: url('assets/enemy.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .enemy.purple{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
+    background-image: url('assets/enemy.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .coin{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
+    background-image: url('assets/coin.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     animation: coinSpin 1s linear infinite;
 }
 
@@ -116,29 +141,38 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
+    background-image: url('assets/surprise.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .surprise-block.hit{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image:
 }
 
 .pipe{
     position: absolute;
     width: 20px;
     height: 20px;
+    background-image: url('assets/pipe.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .pipe-top{
     position: absolute;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
-    background-image:
+    width: 40px;
+    height: 40px;
+    background-image: url('assets/pipe.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .pipe-top-right{
@@ -147,7 +181,6 @@ body{
     right: 0;
     width: 20px;
     height: 20px;
-    background-image:
 }
 
 .pipe-bottom{
@@ -156,7 +189,6 @@ body{
     left: 0;
     width: 20px;
     height: 20px;
-    background-image:
 }
 
 .pipe-bottom-right{
@@ -165,7 +197,6 @@ body{
     right: 0;
     width: 20px;
     height: 20px;
-    background-image:
 }
 
 .controls{
