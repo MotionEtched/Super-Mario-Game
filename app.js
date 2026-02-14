@@ -291,6 +291,26 @@ function gameLoop() {
 //Update Game Logic
 
 function update() {
+    console.log(gameState.keys);
+    // Handles left and right movement
+    if (gameState.keys['ArrowLeft'] || gameState.keys['KeyA']) {
+        player.velocityX = -MOVE_SPEED;
+    } else if (gameState.keys['ArrowRight'] || gameState.keys['KeyD']) {
+        player.velocityX = MOVE_SPEED;
+    } else {
+        player.velocityX *= 0.8;
+    }
+
+    //Handle jumping
+    if (gameState.keys['Space'] && player.grounded) {
+        player.velocityY = JUMP_FORCE;
+        player.grounded = false;
+    }
+
+    //Apply gravity
+    if(!player.grounded) {
+        player.velocityY += GRAVITY;
+    }
 
 }
 
