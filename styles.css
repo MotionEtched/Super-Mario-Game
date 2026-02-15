@@ -45,7 +45,7 @@ body{
     top: 340px;
     width: 20px;
     height: 20px;
-    background-image: url('assets/mario.jpg');
+    background-image: url('assets/mario.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -63,7 +63,7 @@ body{
 #mario-big{
     width: 30px;
     height: 30px;
-    background-image: url('assets/mario.jpg');
+    background-image: url('assets/mario.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -73,7 +73,7 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image: url('assets/platform.jpg');
+    background-image: url('assets/platform.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -101,7 +101,7 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image: url('assets/enemy.jpg');
+    background-image: url('assets/enemy.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -111,7 +111,7 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image: url('assets/enemy.jpg');
+    background-image: url('assets/enemy.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -121,7 +121,7 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image: url('assets/coin.jpg');
+    background-image: url('assets/coin.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -141,7 +141,7 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image: url('assets/surprise.jpg');
+    background-image: url('assets/surprise.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -157,7 +157,7 @@ body{
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image: url('assets/pipe.jpg');
+    background-image: url('assets/pipe.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -169,7 +169,7 @@ body{
     left: 0;
     width: 40px;
     height: 40px;
-    background-image: url('assets/pipe.jpg');
+    background-image: url('assets/pipe.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
